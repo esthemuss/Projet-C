@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "util_func.c"
 
-char
 
 void lireGrille(int tab,char fichiertxt[25])
 {
@@ -22,9 +22,4 @@ void lireGrille(int tab,char fichiertxt[25])
   
 }
 
-
-)
-
-main()
-{
-}
+ 
