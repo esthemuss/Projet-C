@@ -1,4 +1,4 @@
-// Début des conneries sur le projet C
+// Dï¿½but des conneries sur le projet C
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,18 +8,23 @@
 void lireGrille(int tab,char fichiertxt[25])
 {
    char nomfichier;
-   
+
    FILE* grille = NULL;
-   
+
    grille =  fopen(fichiertxt,"r");
-   
+
    while (grille == NULL)
       {
-         printf("La grille n'a pas été trouvée, merci de vérifier le nom du fichier")
+         printf("La grille n'a pas ete trouvee, merci de verifier le nom du fichier")
          scanf("%s",nomfichier)
          grille =  fopen(fichiertxt,"r");
       }
-  
-}
 
- 
+      // Ici dÃ©but du test pour vÃ©rifier la lecture du fichier
+    do
+      {
+         caractereActuel = fgetc(fichier);
+         printf("%c", caractereActuel);
+      } while (caractereActuel != EOF);
+      // Fin du test
+}
