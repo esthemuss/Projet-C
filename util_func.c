@@ -21,7 +21,7 @@ void lireGrille(int tab,char fichiertxt[25])
       {
          printf("La grille n'a pas ete trouvee, merci de verifier le nom du fichier")
          scanf("%s",nomfichier)
-         grille =  fopen(fichiertxt,"r");
+         grille =  fopen(nomfichier,"r");
       }
 
       // Ici début du test pour vérifier la lecture du fichier
