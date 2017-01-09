@@ -1,11 +1,12 @@
+typedef struct coocase Case;
 struct coocase {
   int x;
   int y;
 };
-typedef struct coocase Case;
 
+typedef struct candidats Cand;
 struct candidats {
   int nbc;
   int * tab;
 };
-typedef struct candidats Cand;
+
