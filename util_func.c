@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "util_func.h" // je l'ai laissé mais je sais pas ce que c'est
+#include "util_func.h"
 #define TAILLE_MAX 3
 
 void Debug(char msg)
