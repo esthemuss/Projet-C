@@ -9,6 +9,19 @@ void Debug(char msg[])
    printf("[DEBUG] : %s\n",msg);
 };
 
+void ecriregrille(int G[])
+{
+   int i,j;
+   for(i=0;i<9;i++)
+   {
+      for(j=0;j<9;j++)
+      {
+         printf("%d ",G[i][j]); //Ne marche pas à cause de Virgile ( le génie)
+      }
+      printf("\n");
+   }
+};
+
 void main() //Faire l'en-tête
 {
    FILE* grille = NULL;
@@ -24,11 +37,10 @@ void main() //Faire l'en-tête
    
    while (grille == NULL)
    {
-      printf("La grille n'a pas ete trouvee, merci de verifier le nom du fichier\n");
+      printf("La grille \"%s\" n'a pas ete trouvee, merci de verifier le nom du fichier\n",nomfichier);
       scanf("%s",&nomfichier);
       grille =  fopen(nomfichier,"r");
    }
-   Debug("Début");
    for (i=0;i<9;i++)
    {
       for (j=0;j<9;j++)
@@ -40,6 +52,8 @@ void main() //Faire l'en-tête
             G[x][y]=0;
       }  
    }
+   Debug("Début");
+   ecrireGrille(G);
    Debug("Fin");
    
    /*
@@ -52,24 +66,7 @@ void main() //Faire l'en-tête
       printf("%s", ligne);
    }
    */
+   
    fclose(grille);
 
-}
-
-/*void ecriregrille(int grille[])
-{
-   int i,j;
-   for(i=0;i<9;i++)
-   {
-      for(j=0;j<9;j++)
-      {
-         printf("%d ",grille[i][j]);
-      }
-      printf("\n");
-   }
-}*/
-
-void initTab(int G[],Cand C[], int O[])
-{
-   int i,j;
 }
