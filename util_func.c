@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "util.func.h"
 #define TAILLE_MAX 6
 
 void Debug(char msg[])
