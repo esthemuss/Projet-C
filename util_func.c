@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "util_func.h"
 #define TAILLE_MAX 6
 
 void Debug(char msg[])
@@ -24,7 +25,7 @@ void main() //Faire l'en-tête
    while (grille == NULL)
    {
       printf("La grille n'a pas ete trouvee, merci de verifier le nom du fichier\n");
-      scanf("%s",nomfichier);
+      scanf("%s",&nomfichier);
       grille =  fopen(nomfichier,"r");
    }
    Debug("Début");
@@ -32,7 +33,7 @@ void main() //Faire l'en-tête
    {
       for (j=0;j<9;j++)
       {
-         fscanf(grille, "%d %d %d", x, y, element);
+         fscanf(grille, "%d %d %d", &x, &y, &element);
          if (x==i && y==j)
             G[x][y]=element;
          else
@@ -55,7 +56,7 @@ void main() //Faire l'en-tête
 
 }
 
-void ecriregrille(int grille)
+/*void ecriregrille(int grille[])
 {
    int i,j;
    for(i=0;i<9;i++)
@@ -66,9 +67,9 @@ void ecriregrille(int grille)
       }
       printf("\n");
    }
-}
+}*/
 
-void initTab(Cand C[], int O[])
+void initTab(int G[],Cand C[], int O[])
 {
-   
+   int i,j;
 }
