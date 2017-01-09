@@ -34,3 +34,21 @@ void lireGrille() //Faire l'en-tête
    fclose(grille);
 
 }
+
+void ecriregrille(int grille)
+{
+   int i,j;
+   for(i=0;i<9;i++)
+   {
+      for(j=0;j<9;j++)
+      {
+         printf("%d ",grille[i][j]);
+      }
+      printf("\n");
+   }
+}
+
+void initTab(Cand C[], int O[])
+{
+   
+}
