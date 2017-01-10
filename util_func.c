@@ -19,14 +19,14 @@ void ecrireGrille(int G[9][9])
       for(j=0;j<9;j++)
       {
          if((j+1)%3==0)
-         printf("%d || ", G[i][j] );
+            printf("%d || ", G[i][j] );
          else
-         printf("%d | ", G[i][j] );
+            printf("%d | ", G[i][j] );
       }
       if ((i+1)%3==0)
-      printf("\n=========================================\n");
+         printf("\n=========================================\n");
       else
-      printf("\n-----------------------------------------\n");
+         printf("\n-----------------------------------------\n");
    }
 };
 
@@ -53,19 +53,51 @@ void lireGrille() //Faire l'en-tête
          G[i][j]=0;
    
    while (fscanf(grille, "%d %d %d", &x, &y, &element) != EOF )
-     {
-       trouve = 0;
-       while (trouve == 0)
+   {
+      trouve = 0;
+      while (trouve == 0)
          for (i=0;i<9;i++)
             for (j=0;j<9;j++)
                if (x==i && y==j)
-                 {
+               {
                   G[x][y]= element;
                   trouve = 1;
-                 }    
-      }
+               }    
+   }
       
    ecrireGrille(G);
 
    fclose(grille);
+}
+
+void initTab(Cand C[],Case O[],int G[])
+{
+   int i,j,compteur,a = 0,nc;
+   
+   for (i=0;i<9;i++)
+   {
+      for (i=0;j<9;j++)
+      {
+         C[i][j].nbc = 0;
+         compteur = 0;
+         if (G[i][j] == 0)
+         {
+            O[a] = {i,j};
+            for (nc=1;nc<=9;nc++)
+            { 
+               if (estCandidat(G,i,j,nc) == 1) // Encore a definir selon ce que sera la fonction estCandidat
+               {
+                  C[i][j].nbc = C[i][j].nbc + 1;
+                  C[i][j].tab[compteur] = nc;
+                  compteur =+ 1;  
+               }
+            }
+         }
+         else
+         {
+            C[i][j].nbc = 0;
+            C[i][j].tab = NULL;
+         }    
+      }
+   }
 }
