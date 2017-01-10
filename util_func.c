@@ -33,8 +33,7 @@ void ecrireGrille(int G[9][9])
 void lireGrille() //Faire l'en-tête
 {
    FILE* grille = NULL;
-   int x,y,element,trouve;
-   int i,j;
+   int x,y,i,j,element,trouve;
    int G[9][9];
    char ligne[TAILLE_MAX];
    char nomfichier[100]; //le 100 est à changer je pense
