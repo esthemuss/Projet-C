@@ -9,23 +9,31 @@ void Debug(char msg[])
    printf("[DEBUG] : %s\n",msg);
 };
 
-void ecriregrille(int G[])
+void ecrireGrille(int G[9][9])
 {
    int i,j;
+   printf("=========================================\n");
    for(i=0;i<9;i++)
    {
+      printf("|| ");
       for(j=0;j<9;j++)
       {
-         printf("%d ",G[i][j]); //Ne marche pas à cause de Virgile ( le génie)
+         if((j+1)%3==0)
+         printf("%d || ", G[i][j] );
+         else
+         printf("%d | ", G[i][j] );
       }
-      printf("\n");
+      if ((i+1)%3==0)
+      printf("\n=========================================\n");
+      else
+      printf("\n-----------------------------------------\n");
    }
 };
 
-void main() //Faire l'en-tête
+void lireGrille() //Faire l'en-tête
 {
    FILE* grille = NULL;
-   int x,y,element;
+   int x,y,element,trouve;
    int i,j;
    int G[9][9];
    char ligne[TAILLE_MAX];
@@ -42,31 +50,23 @@ void main() //Faire l'en-tête
       grille =  fopen(nomfichier,"r");
    }
    for (i=0;i<9;i++)
-   {
       for (j=0;j<9;j++)
-      {
-         fscanf(grille, "%d %d %d", &x, &y, &element);
-         if (x==i && y==j)
-            G[x][y]=element;
-         else
-            G[x][y]=0;
-      }  
-   }
-   Debug("Début");
-   ecrireGrille(G);
-   Debug("Fin");
+         G[i][j]=0;
    
-   /*
-   while (fscanf(grille, "%d %d %d", x, y, element) != EOF)
-      G[x][y]=element;
+   while (fscanf(grille, "%d %d %d", &x, &y, &element) != EOF )
+     {
+       trouve = 0;
+       while (trouve == 0)
+         for (i=0;i<9;i++)
+            for (j=0;j<9;j++)
+               if (x==i && y==j)
+                 {
+                  G[x][y]= element;
+                  trouve = 1;
+                 }    
+      }
       
-     
-    (fgets(ligne, TAILLE_MAX, grille) != NULL)
-   {
-      printf("%s", ligne);
-   }
-   */
-   
-   fclose(grille);
+   ecrireGrille(G);
 
+   fclose(grille);
 }
