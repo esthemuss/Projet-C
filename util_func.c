@@ -70,9 +70,9 @@ void lireGrille() //Faire l'en-tête
    fclose(grille);
 }
 
-void initTab(Cand C[9][9],Case O[81],int G[9][9])
+void initTab(Cand C[9][9],Case O[81],int G[9][9],int *a)
 {
-   int i,j,compteur,nc,a = 0;
+   int i,j,compteur,nc,*a = 0;
    
    for (i=0;i<9;i++)
    {
@@ -83,7 +83,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9])
          if (G[i][j] == 0)
          {
             O[a] = {i,j};
-            a =+ 1;
+            *a =+ 1;
             for (nc=1;nc<=9;nc++)
             { 
                if (estCandidat(G,i,j,nc) == 0)
