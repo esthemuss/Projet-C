@@ -73,3 +73,38 @@ Cand estCandidat(int G[],int i, int j, int nc)
       return 0;
       
 };
+
+int admetUnique(int i, int j)
+{
+   if C[i][j].nbc==1
+         return C[i][j].tab[0];
+   else
+      return 0;
+};
+
+void fermerGrille(int G[9][9])
+{
+   Cand C[9][9];
+   Case O[81];
+   int NBO, candidat, nbcandidat;
+   
+   
+   initTab(C[9][9],O[81],int G[9][9],&NBO);
+   
+   while(NBO!=0 || nbcandidat==NBO)
+   {
+      nbcandidat = 0
+         for(i=0;i<=NBO;i++)
+         {
+            candidat = admetUnique(O[NBO].x,O[NBO].y);
+         
+            if candidat!=0
+               fermerCase(O[NBO].x,O[NBO].y,candidat,G[9][9],C[9][9],O[81]);
+               nbcandidat = nbcandidat+1
+         };
+   
+   };
+   
+   ecrireCand(C[9][9])
+   ecrireGrille(G[9][9]);
+};
