@@ -70,6 +70,40 @@ void lireGrille() //Faire l'en-tête
    fclose(grille);
 }
 
+void initTab(Cand C[9][9],Case O[81],int G[9][9])
+{
+   int i,j,compteur,nc,a = 0;
+   
+   for (i=0;i<9;i++)
+   {
+      for (j=0;j<9;j++)
+      {
+         C[i][j].nbc = 0;
+         compteur = 0;
+         if (G[i][j] == 0)
+         {
+            O[a] = {i,j};
+            a =+ 1;
+            for (nc=1;nc<=9;nc++)
+            { 
+               if (estCandidat(G,i,j,nc) == 0)
+               {
+                  C[i][j].nbc =+ 1;
+                  C[i][j].tab[compteur] = nc;
+                  compteur =+ 1; 
+               }
+            }
+         }
+         else
+         {
+            C[i][j].nbc = 0;
+            C[i][j].tab = NULL;
+         }    
+      }
+   }
+}
+
+
 void ecrireCand(Cand C[9][9])
 {
    int x,y,i;
