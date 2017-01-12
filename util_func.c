@@ -113,10 +113,10 @@ void ecrireCand(Cand C[9][9])
            printf("[%d] [%d] : %d",x,y,C[x][y].tab[i]);
 }
 
-void fermerCase(int x,int y,int cand,int G[9][9],Cand C[9][9],Case O[81])
+void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
 {  
    int a;
-   G[x][y]=cand;
+   G[x][y]=candidat;
    initTab(C[9][9],O[81],G[9][9],&a);
    
 }
