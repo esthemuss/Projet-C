@@ -69,3 +69,12 @@ void lireGrille() //Faire l'en-tête
 
    fclose(grille);
 }
+
+void ecrireCand(Cand C[9][9])
+{
+   int x,y,i;
+   for (x=0,y=0;x<81;x++,y++)
+     if (C[x][y].nbc!=0 && C[x][y].tab!=NULL)
+        for(i=0;i<C[x][y].nbc;i++)
+           printf("[%d] [%d] : %d",x,y,C[x][y].tab[i]);
+}
