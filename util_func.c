@@ -70,13 +70,13 @@ void lireGrille() //Faire l'en-tête
    fclose(grille);
 }
 
-void initTab(Cand C[],Case O[],int G[])
+void initTab(Cand C[9][9],Case O[81],int G[9][9])
 {
    int i,j,compteur,a = 0,nc;
    
    for (i=0;i<9;i++)
    {
-      for (i=0;j<9;j++)
+      for (j=0;j<9;j++)
       {
          C[i][j].nbc = 0;
          compteur = 0;
