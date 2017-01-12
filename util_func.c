@@ -85,7 +85,7 @@ void initTab(Cand C[],Case O[],int G[])
             O[a] = {i,j};
             for (nc=1;nc<=9;nc++)
             { 
-               if (estCandidat(G,i,j,nc) == 1) // Encore a definir selon ce que sera la fonction estCandidat
+               if (estCandidat(G,i,j,nc) == 0)
                {
                   C[i][j].nbc = C[i][j].nbc + 1;
                   C[i][j].tab[compteur] = nc;
