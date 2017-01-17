@@ -4,13 +4,9 @@
 #include "util_func.h"
 #define TAILLE_MAX 3
 
-void Debug(char *msg)
-{
-   printf("[DEBUG] : %s\n",*msg);
-};
-
 void ecrireGrille(int G[9][9])
 {
+   printf("Rentre dans ecrireGrille");
    int i,j;
    printf("=========================================\n");
    for(i=0;i<9;i++)
@@ -28,6 +24,7 @@ void ecrireGrille(int G[9][9])
       else
          printf("\n-----------------------------------------\n");
    }
+   printf("Fin de ecrireGrille");
 };
 
 void lireGrille(int G[9][9]) //Faire l'en-tête
@@ -66,12 +63,14 @@ void lireGrille(int G[9][9]) //Faire l'en-tête
 
    ecrireGrille(G);
 
-   fclose(grille);
+   //fclose(grille);
+   printf("Ici ca va ^^");
+
 }
 
 void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 {
-   Debug("Rentre dans l'inittab");
+   printf("Rentre dans l'inittab");
 
    int i,j,compteur,nc,a = 0;
    for (i=0;i<9;i++)
@@ -107,7 +106,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 
 int estCandidat(int G[9][9],int i, int j, int nc)
 {
-   Debug("Rentre dans est candidat");
+   printf("Rentre dans est candidat");
    int ligne, colonne;
    int candligne, candcolonne;
    int x, y;
@@ -147,7 +146,7 @@ int estCandidat(int G[9][9],int i, int j, int nc)
 
 int admetUnique(int i, int j,Cand C[9][9])
 {
-   Debug("Rentre dans admetunique");
+   printf("Rentre dans admetunique");
    if (C[i][j].nbc==1)
          return C[i][j].tab[0];
    else
@@ -155,16 +154,16 @@ int admetUnique(int i, int j,Cand C[9][9])
 };
 
 void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
- {  
-   Debug("Rentre dans fermercase");
+ {
+   printf("Rentre dans fermercase");
    int a;
    G[x][y]=candidat;
    initTab(C,O,G,&a);
  }
- 
+
 void ecrireCand(Cand C[9][9])
 {
-   Debug("Rentre dans ecireCand");
+   printf("Rentre dans ecireCand");
    int x,y,i;
    for (x=0,y=0;x<81;x++,y++)
       if (C[x][y].nbc!=0 && C[x][y].tab!=NULL)
@@ -174,7 +173,7 @@ void ecrireCand(Cand C[9][9])
 
 void fermerGrille(int G[9][9])
 {
-   Debug("Rentre dans fermergrille");
+   printf("Rentre dans fermergrille");
    Cand C[9][9];
    Case O[81];
    int NBO, candidat, nbcandidat,i,j;
