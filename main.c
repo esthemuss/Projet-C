@@ -6,5 +6,7 @@
 
 main()
 {
-
+  int G[9][9];
+  lireGrille(G[9][9]);
+  fermerGrille(G[9][9]);
 };
