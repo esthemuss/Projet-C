@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include "util_func.c"
 
-main()
+int main()
 {
   int G[9][9];
-  lireGrille(G[9][9]);
-  fermerGrille(G[9][9]);
+  lireGrille(G);
+  fermerGrille(G);
+  
+  return 0;
 };
