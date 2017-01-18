@@ -125,13 +125,13 @@ int estCandidat(int G[9][9],int i, int j, int nc)
 
    for(ligne=0;ligne<=8;ligne++)
    {
-      if(nc != G[ligne][j])
+      if(nc == G[ligne][j])
          candligne = 0;
    };
 
    for(colonne=0;colonne<=8;colonne++)
    {
-      if(nc!=G[i][colonne])
+      if(nc == G[i][colonne])
          candcolonne = 0;
    };
 
@@ -144,6 +144,7 @@ int estCandidat(int G[9][9],int i, int j, int nc)
       {
          if(nc == G[i][j])
             candligne = 0;
+            candcolonne = 0;
       };
    };
 
