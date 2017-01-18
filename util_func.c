@@ -89,7 +89,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
             *NBO = a;
             for (nc=1;nc<=9;nc++)
             {
-              printf("nc = %d \n");
+              printf("nc = %d \n",nc);
                if (estCandidat(G,i,j,nc) == 0)
                {
                   printf("plop 0\n");
