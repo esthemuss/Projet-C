@@ -288,19 +288,19 @@ void fermerGrille(int G[9][9])
    printf("Fin d'un initab \n");
    for(i=0;i<NBO;i++)
     printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
-   while(NBO != 0 )
+  /* while(NBO != 0 )
    {
       printf("rentre dans un while \n");
       nbcandidat = 0;
-      for(i=0;i<=NBO;i++)
+      for(i=0;i<NBO;i++)
       {
-         candidat = admetUnique(O[NBO].x,O[NBO].y,C);
+         candidat = admetUnique(O[i].x,O[i].y,C);
 
          if (candidat != 0)
-            fermerCase(O[NBO].x,O[NBO].y,candidat,G,C,O);
+            fermerCase(O[i].x,O[i].y,candidat,G,C,O);
       };
 
-   };
+   };*/
 
    ecrireCand(C);
    ecrireGrille(G);
