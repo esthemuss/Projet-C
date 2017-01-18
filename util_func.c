@@ -72,7 +72,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 {
    printf("Rentre dans l'inittab \n");
 
-   int i,j,compteur,nc = 1,a = 0;
+   int i,j,compteur,nc = 1,a = 0,b;
    for (i=0;i<9;i++)
    {
       for (j=0;j<9;j++)
@@ -92,14 +92,18 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
               printf("nc = %d \n",nc);
                if (estCandidat(G,i,j,nc) == 0)
                {
-                  printf("plop 0\n");
-                  C[i][j].nbc =+ 1;
-                  printf("plop 01\n");
+
+                  C[i][j].nbc = C[i][j].nbc + 1;
                   C[i][j].tab[compteur] = nc;
-                  printf("plop 02\n");
-                  compteur =+ 1;
+                  printf("Contenu de tab : %d \n",C[i][j].tab[compteur]);
+                  compteur++;
+                  printf("Le compteur est a : %d \n",compteur);
+                  for (b=0;b<C[i][j].nbc;b++)
+                   printf("Le contenu de la table C[%d][%d].tab[%d] = %d \n",i,j,b,C[i][j].tab[b]);
                };
+
             };
+
          }
          else
          {
@@ -166,7 +170,7 @@ int estCandidat(int G[9][9],int i, int j, int nc)
 int admetUnique(int i, int j,Cand C[9][9])
 {
    printf("Rentre dans admetunique\n");
-   if (C[i][j].nbc==1)
+   if (C[i][j].nbc == 1)
       return C[i][j].tab[0];
    else
       return 0;
