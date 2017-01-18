@@ -191,7 +191,7 @@ int admetUnique(int i, int j,Cand C[9][9])
 
 void rechDich(int T[],int nb, int val, int *bl, int *pos)
 {
-   int bi=0,bs=nb,m;
+   int bi=0,bs=nb-1,m;
 
    while (*bl == 0 && bi <= bs)
    {
@@ -235,6 +235,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
    int x2,y2; // Variables utiles pour la recherche au sein d'une "grande case" de neuf
    x2 = x%3;
    y2 = y%3;
+   // debut de supression des autres candidats dans ligne et colonnes
    for (i=0;i<9;i++)
    {
       a = 0;
@@ -294,16 +295,19 @@ void fermerGrille(int G[9][9])
 
 
    initTab(C,O,G,&NBO);
+   ecrireCand(C);
    printf("Fin d'un initab \n");
    for(i=0;i<NBO;i++)
     printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
-   while(NBO != 0 )
-   {
+   //while(NBO != 0 )
+   //{
       printf("rentre dans un while \n");
       nbcandidat = 0;
       for(i=0;i<NBO;i++)
       {
          candidat = admetUnique(O[i].x,O[i].y,C);
+         printf(" Candidat = %d ", candidat);
+         printf(" NBO = %d ", NBO);
 
          if (candidat != 0)
          {
@@ -312,7 +316,7 @@ void fermerGrille(int G[9][9])
          };
       };
 
-   };
+   //};
 
    ecrireCand(C);
    ecrireGrille(G);
