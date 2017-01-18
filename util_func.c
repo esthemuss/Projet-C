@@ -85,7 +85,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
          {
             O[a].x = i;
             O[a].y = j;
-            a =+ 1;
+            a++;
             *NBO = a;
             for (nc=1;nc<=9;nc++)
             {
@@ -133,7 +133,7 @@ int estCandidat(int G[9][9],int i, int j, int nc)
 
 
 // Pour section de 9 cases
-int x1, x2, y1, y2;
+  int x1, x2, y1, y2;
 
   if(i >=0 && i<3)
   {
@@ -280,13 +280,15 @@ void fermerGrille(int G[9][9])
 {
    printf("Rentre dans fermergrille \n");
    Cand C[9][9];
-   Case *O = calloc(81,sizeof(int));
+   Case O[81];
    int NBO, candidat, nbcandidat,i,j;
 
 
    initTab(C,O,G,&NBO);
-   /*printf("Fin d'un initab \n");
-   while(NBO!=0)
+   printf("Fin d'un initab \n");
+   for(i=0;i<NBO;i++)
+    printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
+   while(NBO != 0 )
    {
       printf("rentre dans un while \n");
       nbcandidat = 0;
@@ -294,12 +296,11 @@ void fermerGrille(int G[9][9])
       {
          candidat = admetUnique(O[NBO].x,O[NBO].y,C);
 
-         if (candidat!=0)
+         if (candidat != 0)
             fermerCase(O[NBO].x,O[NBO].y,candidat,G,C,O);
-         nbcandidat = nbcandidat+1;
       };
 
-   };*/
+   };
 
    ecrireCand(C);
    ecrireGrille(G);
