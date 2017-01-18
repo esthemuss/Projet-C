@@ -222,7 +222,7 @@ void suppValCase(Case T[],int *nb,int pos)
    for (i=pos;i<*nb;i++)
       T[i].y = T[i+1].x;
       T[i].y = T[i+1].y;
-   *nb = *nb -1;
+   *nb = *nb - 1;
 };
 
 void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
@@ -232,9 +232,6 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
    int a,b; // Booleens pour si le chiffre existe apr�s recherche dicho
    int posa,posb; // Recuperation des positions ou enlever les candidat dans C
    int i,j;
-   int x2,y2; // Variables utiles pour la recherche au sein d'une "grande case" de neuf
-   x2 = x%3;
-   y2 = y%3;
    // debut de supression des autres candidats dans ligne et colonnes
    for (i=0;i<9;i++)
    {
@@ -253,25 +250,61 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       if (b == 1)
       {
          printf("Plop03 !\n");
-         suppVal(C[i][y].tab,&C[x][i].nbc,posa);
+         suppVal(C[i][y].tab,&C[i][y].nbc,posa);
          printf("Plop03bis !");
       };
     };
-    i = x - x2;
-    j = y - y2;
     printf("Plop04 !\n");
-    for(x2=0;x2<=2;x2++)
+
+    int x1, x2, y1, y2;
+
+    if(x >=0 && x<3)
     {
-       for(y2=0;y2<=2;y2++)
-       {
-          rechDich(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
-          if (a == 0)
-          {
-            suppVal(C[x2][y2].tab,&C[x2][y2].nbc,posa);
-            a = 0;
-          };
-       };
-    };
+      x1=0;
+      x2=2;
+    }
+    else if(x>2 && x<6)
+    {
+      x1=3;
+      x2=5;
+    }
+    else if(x>5 && x<=8)
+    {
+      x1=6;
+      x2=8;
+    }
+
+
+    if(y >=0 && y<3)
+    {
+      y1=0;
+      y2=2;
+    }
+    else if(y>2 && y<6)
+    {
+      y1=3;
+      y2=5;
+    }
+    else if(y>5 && y<=8)
+    {
+      y1=6;
+      y2=8;
+    }
+
+  //tester la section
+
+    for(i=x1; j<=x2;j++)
+      for(i=y1; j<=y2;j++)
+      {
+        a = 0;
+        rechDich(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
+        if (a == 1)
+        {
+          suppVal(C[x2][y2].tab,&C[x2][y2].nbc,posa);
+          a = 0;
+        };
+      };
+
 
 printf("Sortir de fermercase \n" );
 };
@@ -291,8 +324,10 @@ void fermerGrille(int G[9][9])
    printf("Rentre dans fermergrille \n");
    Cand C[9][9];
    Case O[81];
+   //int comtab;
    int NBO, candidat, nbcandidat,i,j;
 
+   int T[81] = {0};
 
    initTab(C,O,G,&NBO);
    ecrireCand(C);
@@ -302,18 +337,22 @@ void fermerGrille(int G[9][9])
    //while(NBO != 0 )
    //{
       printf("rentre dans un while \n");
-      nbcandidat = 0;
+      //nbcandidat = 0;
       for(i=0;i<NBO;i++)
       {
          candidat = admetUnique(O[i].x,O[i].y,C);
          printf(" Candidat = %d ", candidat);
+         printf(" I = %d ",i);
          printf(" NBO = %d ", NBO);
 
          if (candidat != 0)
          {
+
             fermerCase(O[i].x,O[i].y,candidat,G,C,O);
             suppValCase(O,&NBO,i);
+            ecrireCand(C);
          };
+
       };
 
    //};
