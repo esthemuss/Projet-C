@@ -7,7 +7,7 @@ struct coocase {
 typedef struct candidats Cand;
 struct candidats {
   int nbc;
-  int * tab;
+  int *tab;
 };
 
 void ecrireGrille(int G[9][9]);
