@@ -165,14 +165,14 @@ int estCandidat(int G[9][9],int i, int j, int nc)
   else if(j>5 && j<=8)
   {
     y1=6;
-    y1=8;
+    y2=8;
   }
 
 //tester la section
 
   for(a=x1; a<=x2;a++)
     for(b=y1; b<=y2;b++)
-       if(nc == G[i][j])
+       if(nc == G[a][b])
         estcand = 1;
    return estcand;
 
@@ -208,11 +208,20 @@ void rechDich(int T[],int nb, int val, int *bl, int *pos)
    };
 };
 
-void suppVal(int T[],int *nb,int nbas,int pos)
+void suppVal(int T[],int *nb,int pos)
 {
    int i;
    for (i=pos;i<*nb;i++)
       T[i] = T[i+1];
+   *nb = *nb -1;
+};
+
+void suppValCase(Case T[],int *nb,int pos)
+{
+   int i;
+   for (i=pos;i<*nb;i++)
+      T[i].y = T[i+1].x;
+      T[i].y = T[i+1].y;
    *nb = *nb -1;
 };
 
@@ -230,26 +239,26 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
    {
       a = 0;
       b = 0;
-      printf("Plop01 !");
+      printf("Plop01 !\n");
       rechDich(C[i][y].tab,C[i][y].nbc,candidat,&b,&posb);
       printf("Plop01 bis!");
       rechDich(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
       printf("Plop01 bis bis!");
       if (a == 1)
       {
-        printf("Plop02 !");
-         suppVal(C[x][i].tab,&C[x][i].nbc,candidat,posa);
+        printf("Plop02 !\n");
+         suppVal(C[x][i].tab,&C[x][i].nbc,posa);
       };
       if (b == 1)
       {
-         printf("Plop03 !");
-         suppVal(C[i][y].tab,&C[x][i].nbc,candidat,posa);
+         printf("Plop03 !\n");
+         suppVal(C[i][y].tab,&C[x][i].nbc,posa);
          printf("Plop03bis !");
       };
     };
     i = x - x2;
     j = y - y2;
-    printf("Plop04 !");
+    printf("Plop04 !\n");
     for(x2=0;x2<=2;x2++)
     {
        for(y2=0;y2<=2;y2++)
@@ -257,7 +266,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
           rechDich(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
           if (a == 0)
           {
-            suppVal(C[x2][y2].tab,&C[x2][y2].nbc,candidat,posa);
+            suppVal(C[x2][y2].tab,&C[x2][y2].nbc,posa);
             a = 0;
           };
        };
@@ -288,7 +297,7 @@ void fermerGrille(int G[9][9])
    printf("Fin d'un initab \n");
    for(i=0;i<NBO;i++)
     printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
-  /* while(NBO != 0 )
+   while(NBO != 0 )
    {
       printf("rentre dans un while \n");
       nbcandidat = 0;
@@ -297,10 +306,13 @@ void fermerGrille(int G[9][9])
          candidat = admetUnique(O[i].x,O[i].y,C);
 
          if (candidat != 0)
+         {
             fermerCase(O[i].x,O[i].y,candidat,G,C,O);
+            suppValCase(O,&NBO,i);
+         };
       };
 
-   };*/
+   };
 
    ecrireCand(C);
    ecrireGrille(G);
