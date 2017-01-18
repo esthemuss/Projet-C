@@ -119,49 +119,62 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 int estCandidat(int G[9][9],int i, int j, int nc)
 {
    printf("Rentre dans est candidat\n");
-   int ligne, colonne;
-   int candligne, candcolonne;
-   int x, y;
-   x = i%3;
-   y = j%3;
-   candligne = 1;
-   candcolonne = 1;
+   int estcand = 0,a,b;
+   // Test pour ligne
+   for(a=0;a<9;a++)
+     if(nc == G[a][j])
+        estcand = 1;
 
-   for(ligne=0;ligne<=8;ligne++)
-   {
-      if(nc == G[ligne][j])
-         candligne = 0;
-   };
-
-   for(colonne=0;colonne<=8;colonne++)
-   {
-      if(nc == G[i][colonne])
-         candcolonne = 0;
-   };
-
-   i = i-x;
-   j = j-y;
-
-   for(i=0;i<=2;i++)
-   {
-      for(j=0;j<=2;j++)
-      {
-         if(nc == G[i][j])
-            candligne = 0;
-            candcolonne = 0;
-      };
-   };
+        // pour colonne
+    for(b=0; b<9; b++)
+      if(nc==G[i][b])
+        estcand = 1;
 
 
-   if(candligne == 0 && candcolonne == 0)
-   {
-      return 1;
-      printf("%d n'est pas candidat !",nc);
-   }
-   else {
-     printf("%d est candidat !",nc);
-     return 0;
-   }
+
+// Pour section de 9 cases
+int x1, x2, y1, y2;
+
+  if(i >=0 && i<3)
+  {
+    x1=0;
+    x2=2;
+  }
+  else if(i>2 && i<6)
+  {
+    x1=3;
+    x2=5;
+  }
+  else if(i>5 && i<=8)
+  {
+    x1=6;
+    x2=8;
+  }
+
+
+  if(j >=0 && j<3)
+  {
+    y1=0;
+    y2=2;
+  }
+  else if(j>2 && j<6)
+  {
+    y1=3;
+    y2=5;
+  }
+  else if(j>5 && j<=8)
+  {
+    y1=6;
+    y1=8;
+  }
+
+//tester la section
+
+  for(a=x1; a<=x2;a++)
+    for(b=y1; b<=y2;b++)
+       if(nc == G[i][j])
+        estcand = 1;
+   return estcand;
 
    printf("se barre de  estcandidat\n");
 
