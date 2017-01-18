@@ -72,7 +72,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 {
    printf("Rentre dans l'inittab \n");
 
-   int i,j,compteur,nc,a = 0;
+   int i,j,compteur,nc = 1,a = 0;
    for (i=0;i<9;i++)
    {
       for (j=0;j<9;j++)
@@ -80,15 +80,16 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
          C[i][j].nbc = 0;
          C[i][j].tab = malloc(9 * sizeof(int));
          compteur = 0;
+         printf("Fais le test de G[%d][%d] == %d \n",i,j,G[i][j]);
          if (G[i][j] == 0)
          {
-            printf("Fais le test de G[i][j] == 0 \n");
             O[a].x = i;
             O[a].y = j;
             a =+ 1;
             *NBO = a;
             for (nc=1;nc<=9;nc++)
-            { printf("Est candidat test avant for %d \n",estCandidat(G,i,j,nc));
+            {
+              printf("nc = %d \n");
                if (estCandidat(G,i,j,nc) == 0)
                {
                   printf("plop 0\n");
@@ -97,19 +98,19 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
                   C[i][j].tab[compteur] = nc;
                   printf("plop 02\n");
                   compteur =+ 1;
-               }
-            }
+               };
+            };
          }
          else
          {
             C[i][j].nbc = 0;
             C[i][j].tab = NULL;
-            printf("plop NULL");
-         }
-      }
-   }
+            printf("plop NULL \n");
+         };
+      };
+   };
    printf("Sort de l'inittab \n");
-}
+};
 
 int estCandidat(int G[9][9],int i, int j, int nc)
 {
@@ -141,15 +142,21 @@ int estCandidat(int G[9][9],int i, int j, int nc)
    {
       for(j=0;j<=2;j++)
       {
-         if(nc==G[i][j])
-            return 1;
+         if(nc == G[i][j])
+            candligne = 0;
       };
    };
 
-   printf("se barre de  estcandidat\n");
 
    if(candligne == 0 && candcolonne == 0)
-      return 0;
+   {
+      return 1;
+      printf("%d n'est pas candidat !",nc);
+   }
+   else {
+     printf("%d est candidat !",nc);
+     return 0;
+   }
 
    printf("se barre de  estcandidat\n");
 
@@ -164,24 +171,24 @@ int admetUnique(int i, int j,Cand C[9][9])
       return 0;
 };
 
-void rechDich(int T[],int nb, int val, int *b, int *pos)
+void rechDich(int T[],int nb, int val, int *bl, int *pos)
 {
    int bi=0,bs=nb,m;
 
-   while (*b == 0 && bi <= bs)
+   while (*bl == 0 && bi <= bs)
    {
       m = (bi+bs)/2;
       if (T[m] = val)
       {
          *pos = m;
-         *b = 1;
+         *bl = 1;
       }
       else if (T[m] > val)
          bs = m - 1;
       else
          bi = m +1;
-   }
-}
+   };
+};
 
 void suppVal(int T[],int *nb,int nbas,int pos)
 {
@@ -189,7 +196,7 @@ void suppVal(int T[],int *nb,int nbas,int pos)
    for (i=pos;i<*nb;i++)
       T[i] = T[i+1];
    *nb = *nb -1;
-}
+};
 
 void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
 {
@@ -206,9 +213,9 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       a = 0;
       b = 0;
       printf("Plop01 !");
-      rechDich(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
+      rechDich(C[i][y].tab,C[i][y].nbc,candidat,&b,&posb);
       printf("Plop01 bis!");
-      rechDich(C[x][i].tab,C[i][y].nbc,candidat,&b,&posb);
+      rechDich(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
       printf("Plop01 bis bis!");
       if (a == 1)
       {
@@ -218,7 +225,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       if (b == 1)
       {
          printf("Plop03 !");
-         suppVal(C[x][i].tab,&C[x][i].nbc,candidat,posa);
+         suppVal(C[i][y].tab,&C[x][i].nbc,candidat,posa);
          printf("Plop03bis !");
       };
     };
@@ -232,7 +239,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
           rechDich(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
           if (a == 0)
           {
-            suppVal(C[x][i].tab,&C[x][i].nbc,candidat,posa);
+            suppVal(C[x2][y2].tab,&C[x2][y2].nbc,candidat,posa);
             a = 0;
           };
        };
@@ -243,14 +250,14 @@ printf("Sortir de fermercase \n" );
 
 void ecrireCand(Cand C[9][9])
 {
-   printf("Rentre dans ecireCand\n");
+   printf("Rentre dans ecrireCand\n");
    int x,y,i;
-   for (x=0,y=0;x<81;x++,y++)
+   for (x=0;x<9;x++)
+      for (y=0;y<9;y++)
       if (C[x][y].nbc!=0 && C[x][y].tab!=NULL)
          for(i=0;i<C[x][y].nbc;i++)
             printf("[%d] [%d] : %d \n",x,y,C[x][y].tab[i]);
 }
-
 void fermerGrille(int G[9][9])
 {
    printf("Rentre dans fermergrille \n");
@@ -260,7 +267,7 @@ void fermerGrille(int G[9][9])
 
 
    initTab(C,O,G,&NBO);
-   printf("Fin d'un initab \n");
+   /*printf("Fin d'un initab \n");
    while(NBO!=0)
    {
       printf("rentre dans un while \n");
@@ -274,7 +281,7 @@ void fermerGrille(int G[9][9])
          nbcandidat = nbcandidat+1;
       };
 
-   };
+   };*/
 
    ecrireCand(C);
    ecrireGrille(G);
