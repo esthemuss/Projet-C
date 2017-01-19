@@ -64,13 +64,13 @@ void lireGrille(int G[9][9]) //Faire l'en-tête
    ecrireGrille(G);
 
    //fclose(grille);
-   printf("Ici ca va ^^");
+   printf("Sort de lireGrille");
 
 }
 
 void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
 {
-   printf("Rentre dans l'inittab \n");
+   printf("Rentre dans initTab \n");
 
    int i,j,compteur,nc = 1,a = 0,b;
    for (i=0;i<9;i++)
@@ -97,7 +97,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
                   C[i][j].tab[compteur] = nc;
                   printf("Contenu de tab : %d \n",C[i][j].tab[compteur]);
                   compteur++;
-                  printf("Le compteur est a : %d \n",compteur);
+                  printf("Le compteur est à : %d \n",compteur);
                   for (b=0;b<C[i][j].nbc;b++)
                    printf("Le contenu de la table C[%d][%d].tab[%d] = %d \n",i,j,b,C[i][j].tab[b]);
                };
@@ -109,16 +109,16 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
          {
             C[i][j].nbc = 0;
             C[i][j].tab = NULL;
-            printf("plop NULL \n");
+            printf("Case fermée \n");
          };
       };
    };
-   printf("Sort de l'inittab \n");
+   printf("Sort de initTab \n");
 };
 
 int estCandidat(int G[9][9],int i, int j, int nc)
 {
-   printf("Rentre dans est candidat\n");
+   printf("Rentre dans estCandidat\n");
    int estcand = 0,a,b;
    // Test pour ligne
    for(a=0;a<9;a++)
@@ -176,13 +176,13 @@ int estCandidat(int G[9][9],int i, int j, int nc)
         estcand = 1;
    return estcand;
 
-   printf("se barre de  estcandidat\n");
+   printf("Sort de estCandidat\n");
 
 };
 
 int admetUnique(int i, int j,Cand C[9][9])
 {
-   printf("Rentre dans admetunique\n");
+   printf("Rentre dans admetUnique\n");
 
    if (C[i][j].nbc == 1)
    {
@@ -223,7 +223,7 @@ void suppValCase(Case T[],int *nb,int pos)
 
 void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
 {
-   printf("Rentre dans fermer case \n" );
+   printf("Rentre dans fermerCase \n" );
    G[x][y] = candidat;
    int a,b; // Booleens pour si le chiffre existe apr�s recherche dicho
    int posa,posb; // Recuperation des positions ou enlever les candidat dans C
@@ -233,16 +233,15 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
    {
       a = 0;
       b = 0;
-      printf("Plop01 !\n");
+      printf("Recherche séquentielle horizontale\n");
       rechSeq(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
       printf("a = %d",a);
-      printf("Plop01 bis! ");
+      printf("Recherche séquentielle verticale\n ");
       rechSeq(C[i][y].tab,C[i][y].nbc,candidat,&b,&posb);
       printf("b = %d",b);
-      printf(" Plop01 bis bis! ");
       if (a == 1)
       {
-        printf(" Plop02 ! ");
+        printf(" Suppression du candidat dans la ligne");
          suppVal(C[x][i].tab,&C[x][i].nbc,posa);
         for (k=0;k<C[x][i].nbc;k++)
           printf(" C[%d][%d].tab[%d] = %d ",x,i,k,C[x][i].tab[k]);
@@ -250,14 +249,14 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       };
       if (b == 1)
       {
-         printf(" Plop03 ! \n");
+         printf(" Suppression du candidat dans la colonne \n");
          suppVal(C[i][y].tab,&C[i][y].nbc,posb);
          for (k=0;k<C[i][y].nbc;k++)
            printf(" C[%d][%d].tab[%d] = %d ",i,y,k,C[i][y].tab[k]);
          printf(" Suppr pour b ! \n");
       };
     };
-    printf(" Fin des suppr ligne/colonne !\n");
+    printf(" Fin des suppr ligne/colonne \n");
 
     int x1, x2, y1, y2;
 
@@ -314,7 +313,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       };
 
 
-printf("Sortir de fermercase \n" );
+printf("Sort de fermerCase \n" );
 };
 
 void ecrireCand(Cand C[9][9])
@@ -326,10 +325,11 @@ void ecrireCand(Cand C[9][9])
       if (C[x][y].nbc!=0 && C[x][y].tab!=NULL)
          for(i=0;i<C[x][y].nbc;i++)
             printf("[%d] [%d] : %d \n",x,y,C[x][y].tab[i]);
+   pritnf("Sort de ecrireCand\n");
 }
 void fermerGrille(int G[9][9])
 {
-   printf("Rentre dans fermergrille \n");
+   printf("Rentre dans fermerGrille \n");
    Cand C[9][9];
    Case O[81];
    //int comtab;
@@ -339,7 +339,7 @@ void fermerGrille(int G[9][9])
 
    initTab(C,O,G,&NBO);
    ecrireCand(C);
-   printf("Fin d'un initab \n");
+   printf("Fin d'un initTab \n");
    for(i=0;i<NBO;i++)
     printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
    //while(NBO != 0 )
@@ -368,7 +368,7 @@ void fermerGrille(int G[9][9])
          else
          {
           i = i + 1;
-          printf(" I quand cand = 0 : %d ",i);
+          printf(" i quand cand = 0 : %d ",i);
         };
       };
    //};
