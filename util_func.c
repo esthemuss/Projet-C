@@ -247,7 +247,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       if (b == 1)
       {
          printf(" Plop03 ! \n");
-         suppVal(C[i][y].tab,&C[i][y].nbc,posa);
+         suppVal(C[i][y].tab,&C[i][y].nbc,posb);
          for (k=0;k<C[i][y].nbc;k++)
            printf(" C[%d][%d].tab[%d] = %d ",i,y,k,C[i][y].tab[k]);
          printf(" Suppr pour b ! \n");
@@ -292,14 +292,19 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
 
   //tester la section
 
-    for(i=x1; j<=x2;j++)
-      for(i=y1; j<=y2;j++)
+    for(i=x1; i<=x2;i++)
+      for(j=y1; j<=y2;j++)
       {
         a = 0;
-        rechSeq(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
+        printf("Debut de recherche dans section\n" );
+        rechSeq(C[i][j].tab,C[i][j].nbc,candidat,&a,&posa);
+        printf(" a = %d ",a);
         if (a == 1)
         {
-          suppVal(C[x2][y2].tab,&C[x2][y2].nbc,posa);
+          printf(" Debut suppression dans section : ");
+          suppVal(C[i][j].tab,&C[i][j].nbc,posa);
+          for(k=0;k<0;k++)
+            printf("C[%d][%d].tab[k] = %d",x2,y2,C[i][j].tab[k]);
           a = 0;
         };
       };
