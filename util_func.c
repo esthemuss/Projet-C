@@ -375,4 +375,5 @@ void fermerGrille(int G[9][9])
 
    ecrireCand(C);
    ecrireGrille(G);
+   fclose(grille);
 };
