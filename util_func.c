@@ -183,8 +183,12 @@ int estCandidat(int G[9][9],int i, int j, int nc)
 int admetUnique(int i, int j,Cand C[9][9])
 {
    printf("Rentre dans admetunique\n");
+
    if (C[i][j].nbc == 1)
+   {
       return C[i][j].tab[0];
+
+   }
    else
       return 0;
 };
@@ -202,19 +206,19 @@ void rechSeq(int T[],int nb, int val, int *bl, int *pos)
 
 void suppVal(int T[],int *nb,int pos)
 {
-   int i;
-   for (i=pos;i<*nb;i++)
-      T[i] = T[i+1];
+   int l;
+   for (l=pos;l<*nb;l++)
+      T[l] = T[l+1];
    *nb = *nb -1;
 };
 
 void suppValCase(Case T[],int *nb,int pos)
 {
-   int i;
-   for (i=pos;i<*nb;i++)
-      T[i].x = T[i+1].x;
-      T[i].y = T[i+1].y;
-   *nb = *nb - 1;
+   int l;
+   for (l=pos;l<*nb;l++)
+      T[l].x = T[l+1].x;
+      T[l].y = T[l+1].y;
+   //*nb = *nb - 1;
 };
 
 void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
@@ -303,8 +307,8 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
         {
           printf(" Debut suppression dans section : ");
           suppVal(C[i][j].tab,&C[i][j].nbc,posa);
-          for(k=0;k<0;k++)
-            printf("C[%d][%d].tab[k] = %d",x2,y2,C[i][j].tab[k]);
+          for(k=0;k<C[i][j].nbc;k++)
+            printf("C[%d][%d].tab[%d] = %d",i,j,k,C[i][j].tab[k]);
           a = 0;
         };
       };
@@ -340,14 +344,18 @@ void fermerGrille(int G[9][9])
     printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
    //while(NBO != 0 )
    //{
-      printf("rentre dans un while \n");
+    //  printf("rentre dans un while \n");
       //nbcandidat = 0;
-      for(i=0;i<NBO;i++)
+      //for(i=0;i<NBO;i++)
+      i = 0;
+      while (i < NBO)
       {
+        printf("O[%d] = { x = %d | y = %d } \n",i,O[i].x,O[i].y);
          candidat = admetUnique(O[i].x,O[i].y,C);
          printf(" Candidat = %d ", candidat);
          printf(" I = %d ",i);
          printf(" NBO = %d ", NBO);
+
 
          if (candidat != 0)
          {
@@ -355,10 +363,14 @@ void fermerGrille(int G[9][9])
             fermerCase(O[i].x,O[i].y,candidat,G,C,O);
             suppValCase(O,&NBO,i);
             ecrireCand(C);
-         };
 
+         }
+         else
+         {
+          i = i + 1;
+          printf(" I quand cand = 0 : %d ",i);
+        };
       };
-
    //};
 
    ecrireCand(C);
