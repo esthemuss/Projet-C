@@ -78,7 +78,7 @@ void initTab(Cand C[9][9],Case O[81],int G[9][9],int *NBO)
       for (j=0;j<9;j++)
       {
          C[i][j].nbc = 0;
-         C[i][j].tab = malloc(9 * sizeof(int));
+         C[i][j].tab = calloc(9, sizeof(int));
          compteur = 0;
          printf("Fais le test de G[%d][%d] == %d \n",i,j,G[i][j]);
          if (G[i][j] == 0)
@@ -189,23 +189,15 @@ int admetUnique(int i, int j,Cand C[9][9])
       return 0;
 };
 
-void rechDich(int T[],int nb, int val, int *bl, int *pos)
+void rechSeq(int T[],int nb, int val, int *bl, int *pos)
 {
-   int bi=0,bs=nb-1,m;
-
-   while (*bl == 0 && bi <= bs)
-   {
-      m = (bi+bs)/2;
-      if (T[m] = val)
+  int i;
+   for(i=0;i<nb;i++)
+      if (T[i] == val)
       {
-         *pos = m;
-         *bl = 1;
-      }
-      else if (T[m] > val)
-         bs = m - 1;
-      else
-         bi = m +1;
-   };
+        *pos = i;
+        *bl = 1;
+      };
 };
 
 void suppVal(int T[],int *nb,int pos)
@@ -220,7 +212,7 @@ void suppValCase(Case T[],int *nb,int pos)
 {
    int i;
    for (i=pos;i<*nb;i++)
-      T[i].y = T[i+1].x;
+      T[i].x = T[i+1].x;
       T[i].y = T[i+1].y;
    *nb = *nb - 1;
 };
@@ -231,30 +223,37 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
    G[x][y] = candidat;
    int a,b; // Booleens pour si le chiffre existe apr�s recherche dicho
    int posa,posb; // Recuperation des positions ou enlever les candidat dans C
-   int i,j;
+   int i,j,k;
    // debut de supression des autres candidats dans ligne et colonnes
    for (i=0;i<9;i++)
    {
       a = 0;
       b = 0;
       printf("Plop01 !\n");
-      rechDich(C[i][y].tab,C[i][y].nbc,candidat,&b,&posb);
-      printf("Plop01 bis!");
-      rechDich(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
-      printf("Plop01 bis bis!");
+      rechSeq(C[x][i].tab,C[x][i].nbc,candidat,&a,&posa);
+      printf("a = %d",a);
+      printf("Plop01 bis! ");
+      rechSeq(C[i][y].tab,C[i][y].nbc,candidat,&b,&posb);
+      printf("b = %d",b);
+      printf(" Plop01 bis bis! ");
       if (a == 1)
       {
-        printf("Plop02 !\n");
+        printf(" Plop02 ! ");
          suppVal(C[x][i].tab,&C[x][i].nbc,posa);
+        for (k=0;k<C[x][i].nbc;k++)
+          printf(" C[%d][%d].tab[%d] = %d ",x,i,k,C[x][i].tab[k]);
+        printf(" Suppr pour a ! ");
       };
       if (b == 1)
       {
-         printf("Plop03 !\n");
+         printf(" Plop03 ! \n");
          suppVal(C[i][y].tab,&C[i][y].nbc,posa);
-         printf("Plop03bis !");
+         for (k=0;k<C[i][y].nbc;k++)
+           printf(" C[%d][%d].tab[%d] = %d ",i,y,k,C[i][y].tab[k]);
+         printf(" Suppr pour b ! \n");
       };
     };
-    printf("Plop04 !\n");
+    printf(" Fin des suppr ligne/colonne !\n");
 
     int x1, x2, y1, y2;
 
@@ -297,7 +296,7 @@ void fermerCase(int x,int y,int candidat,int G[9][9],Cand C[9][9],Case O[81])
       for(i=y1; j<=y2;j++)
       {
         a = 0;
-        rechDich(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
+        rechSeq(C[x2][y2].tab,C[x2][y2].nbc,candidat,&a,&posa);
         if (a == 1)
         {
           suppVal(C[x2][y2].tab,&C[x2][y2].nbc,posa);
